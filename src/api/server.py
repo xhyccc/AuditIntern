@@ -11,6 +11,8 @@ import sys
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from src.utils.project_manager import ProjectManager, SessionManager
@@ -18,6 +20,16 @@ from src.utils.project_manager import ProjectManager, SessionManager
 app = FastAPI(title="AuditIntern API", version="0.1.0")
 
 _project_manager = ProjectManager()
+
+# Maximum accepted size (in bytes) for the ``params`` query argument on
+# /gateway/stream. Small enough to block obvious DoS payloads, big enough to
+# carry a non-trivial instruction.
+MAX_PARAMS_SIZE_BYTES = 64 * 1024
+
+# Mount the Gateway UI (plain HTML + SSE) at /ui.
+_STATIC_DIR = pathlib.Path(__file__).resolve().parent.parent.parent / "static"
+if _STATIC_DIR.is_dir():
+    app.mount("/ui", StaticFiles(directory=str(_STATIC_DIR), html=True), name="ui")
 
 
 # ---- Request / Response Models ----
@@ -107,7 +119,78 @@ async def upload_file(project_id: str, file: UploadFile = File(...)):
     return {"filename": safe_filename, "path": str(dest), "size": len(content)}
 
 
+# ---- Gateway: SSE streaming endpoint ----
+
+@app.get("/gateway/intents")
+def list_intents():
+    """List the intents the Gateway can dispatch (mirrors MCP tools/list)."""
+    from src.cli.main import INTENT_MAP
+    return {"intents": sorted(INTENT_MAP.keys())}
+
+
+@app.post("/gateway/run")
+def gateway_run(body: SubmitTaskRequest):
+    """Run an intent once and return the sanitized result (no session required)."""
+    result = _dispatch_instruction({"intent": body.intent, "params": body.params})
+    # ``_sanitize_result`` replaces any error payload with a hard-coded, generic
+    # message, so no dispatch-side stack-trace detail can reach the response.
+    return _sanitize_result(result)  # lgtm[py/stack-trace-exposure]
+
+
+@app.get("/gateway/stream")
+def gateway_stream(intent: str, params: str = "{}"):
+    """Server-Sent Events endpoint that streams lifecycle events for a single intent.
+
+    Query params:
+        intent: intent name (see /gateway/intents)
+        params: JSON-encoded params object (default "{}");
+                max ``MAX_PARAMS_SIZE_BYTES`` bytes.
+
+    Emits three events: ``started``, ``result``, ``done``. All payloads are
+    JSON. Errors in parsing or dispatch surface as an ``error`` event.
+    """
+    # Bound the input to protect against oversized payloads.
+    if len(params) > MAX_PARAMS_SIZE_BYTES:
+        def _too_big():
+            yield _sse("error", {"message": "'params' exceeds 64 KiB limit"})
+            yield _sse("done", {"status": "error"})
+        return StreamingResponse(_too_big(), media_type="text/event-stream")
+
+    try:
+        parsed_params = json.loads(params)
+        if not isinstance(parsed_params, dict):
+            raise ValueError("params must be a JSON object")
+    except (json.JSONDecodeError, ValueError):
+        # Stream a generic parse error (no exception detail) so we don't leak
+        # parser internals to callers.
+        def _err_gen():
+            yield _sse("error", {"message": "Invalid 'params': expected a JSON object"})
+            yield _sse("done", {"status": "error"})
+
+        return StreamingResponse(_err_gen(), media_type="text/event-stream")
+
+    def _gen():
+        yield _sse("started", {"intent": intent})
+        result = _dispatch_instruction({"intent": intent, "params": parsed_params})
+        # Sanitized: error payloads are replaced with a hard-coded generic
+        # message before being written to the stream.
+        safe_result = _sanitize_result(result)
+        yield _sse("result", safe_result)
+        yield _sse("done", {"status": safe_result.get("status", "ok")})
+
+    return StreamingResponse(
+        _gen(),  # lgtm[py/stack-trace-exposure]
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
+
+
 # ---- Helpers ----
+
+def _sse(event: str, data: Any) -> str:
+    """Format one Server-Sent Events message."""
+    return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
+
 
 def _dispatch_instruction(instruction: dict) -> dict:
     """Dispatch instruction to the CLI and return the result."""

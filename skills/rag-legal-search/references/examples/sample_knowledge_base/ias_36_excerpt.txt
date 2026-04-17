@@ -1,0 +1,23 @@
+IAS 36 — Impairment of Assets (Excerpt)
+
+Objective
+
+The objective of this Standard is to prescribe the procedures that an entity applies to ensure that its assets are carried at no more than their recoverable amount.
+
+Indicators of Impairment
+
+An entity shall assess at the end of each reporting period whether there is any indication that an asset may be impaired. External indicators include: significant decline in market value; significant adverse changes in the technological, market, economic or legal environment; market interest rates have increased; carrying amount of net assets exceeds market capitalisation.
+
+Internal indicators include: evidence of obsolescence or physical damage; significant changes in how an asset is used; internal reporting evidence that asset performance is worse than expected.
+
+Recoverable Amount
+
+The recoverable amount of an asset or cash-generating unit is the higher of its fair value less costs of disposal and its value in use.
+
+Value in Use
+
+Value in use is the present value of the future cash flows expected to be derived from an asset or cash-generating unit. The discount rate shall be a pre-tax rate that reflects current market assessments of the time value of money and the risks specific to the asset.
+
+Goodwill
+
+For the purposes of impairment testing, goodwill acquired in a business combination shall be allocated to each of the acquirer's cash-generating units, or groups of units, that are expected to benefit from the synergies of the combination, irrespective of whether other assets or liabilities of the acquiree are assigned to those units.

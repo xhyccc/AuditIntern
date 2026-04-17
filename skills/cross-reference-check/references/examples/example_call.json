@@ -1,0 +1,11 @@
+{
+  "intent": "run_cross_reference",
+  "params": {
+    "rules_file": "skills/cross-reference-check/references/examples/sample_rules.json",
+    "data_files": {
+      "income_stmt": "skills/cross-reference-check/references/examples/sample_income_stmt.csv",
+      "trial_balance": "skills/cross-reference-check/references/examples/sample_trial_balance.csv"
+    },
+    "output_path": "results/cross_reference_result.json"
+  }
+}

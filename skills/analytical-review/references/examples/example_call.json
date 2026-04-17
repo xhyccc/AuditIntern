@@ -1,0 +1,10 @@
+{
+  "intent": "run_analytical_review",
+  "params": {
+    "current_file": "skills/analytical-review/references/examples/sample_current.csv",
+    "prior_file": "skills/analytical-review/references/examples/sample_prior.csv",
+    "output_path": "results/analytical_review_result.json",
+    "threshold_pct": 15.0,
+    "threshold_amount": 500000
+  }
+}

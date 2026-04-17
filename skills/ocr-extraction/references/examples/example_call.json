@@ -1,0 +1,7 @@
+{
+  "intent": "run_ocr",
+  "params": {
+    "file_path": "uploads/invoice_scan.png",
+    "output_path": "results/ocr_result.json"
+  }
+}

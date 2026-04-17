@@ -1,0 +1,5 @@
+account,debit,credit,amount
+Revenue,0,5000000,5000000
+COGS,3200000,0,3200000
+Cash,1500000,0,1500000
+Receivables,2200000,0,2200000

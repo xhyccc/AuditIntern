@@ -1,0 +1,34 @@
+{
+  "status": "ok",
+  "flagged_accounts": [
+    {
+      "account": "Accounts Receivable",
+      "current": 3200000.0,
+      "prior": 1800000.0,
+      "change_pct": 77.78,
+      "change_amount": 1400000.0
+    },
+    {
+      "account": "Inventory",
+      "current": 850000.0,
+      "prior": 1200000.0,
+      "change_pct": -29.17,
+      "change_amount": -350000.0
+    },
+    {
+      "account": "Revenue",
+      "current": -15000000.0,
+      "prior": -12000000.0,
+      "change_pct": 25.0,
+      "change_amount": -3000000.0
+    },
+    {
+      "account": "Cost of Sales",
+      "current": 10500000.0,
+      "prior": 8400000.0,
+      "change_pct": 25.0,
+      "change_amount": 2100000.0
+    }
+  ],
+  "narrative": "Analytical review identified 4 account(s) with significant variances (threshold: 15.0% or ¥500,000)."
+}

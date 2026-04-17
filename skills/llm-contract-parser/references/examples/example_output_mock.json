@@ -1,0 +1,11 @@
+{
+  "status": "ok",
+  "fields": {
+    "transaction_amount": "2,500,000",
+    "effective_date": "2024-03-01",
+    "party_a": "N/A (mock)",
+    "party_b": "N/A (mock)",
+    "key_terms": ["N/A (mock)"]
+  },
+  "source": "mock"
+}

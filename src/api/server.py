@@ -76,7 +76,9 @@ def submit_task(session_id: str, body: SubmitTaskRequest):
     result = _dispatch_instruction(instruction)
 
     sm.save_result(session_id, task_id, result)
-    return {"task_id": task_id, "status": "completed", "result": result}
+    # Sanitize error messages before returning to external caller
+    safe_result = _sanitize_result(result)
+    return {"task_id": task_id, "status": "completed", "result": safe_result}
 
 
 @app.get("/sessions/{session_id}/results/{task_id}")
@@ -110,6 +112,13 @@ def _dispatch_instruction(instruction: dict) -> dict:
     """Dispatch instruction to the CLI and return the result."""
     from src.cli.main import dispatch
     return dispatch(instruction)
+
+
+def _sanitize_result(result: dict) -> dict:
+    """Remove or truncate detailed error messages before exposing to API callers."""
+    if result.get("status") == "error":
+        return {"status": "error", "message": "Task failed. Check server logs for details."}
+    return result
 
 
 def _find_session_manager(session_id: str):

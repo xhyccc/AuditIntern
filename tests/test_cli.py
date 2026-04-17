@@ -1,10 +1,13 @@
 """Tests for the CLI orchestrator."""
 
 import json
+import pathlib
 import subprocess
 import sys
 import pandas as pd
 import pytest
+
+_REPO_ROOT = pathlib.Path(__file__).parent.parent
 
 
 def _write_csv(tmp_path, data: dict, filename: str) -> str:
@@ -20,7 +23,7 @@ def _run_cli(instruction: dict) -> dict:
         input=json.dumps(instruction),
         capture_output=True,
         text=True,
-        cwd="/home/runner/work/AuditIntern/AuditIntern",
+        cwd=str(_REPO_ROOT),
     )
     return json.loads(result.stdout)
 
@@ -71,7 +74,7 @@ def test_cli_from_instruction_file(tmp_path):
         [sys.executable, "-m", "src.cli.main", "--instruction", str(instr_file)],
         capture_output=True,
         text=True,
-        cwd="/home/runner/work/AuditIntern/AuditIntern",
+        cwd=str(_REPO_ROOT),
     )
     parsed = json.loads(result.stdout)
     assert parsed["status"] == "ok"

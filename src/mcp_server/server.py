@@ -129,7 +129,7 @@ def handle_request(message: dict[str, Any]) -> dict[str, Any] | None:
         try:
             result = dispatch({"intent": name, "params": tool_params})
         except Exception:  # noqa: BLE001 -- defensive; dispatch already catches, but stay safe
-            print(traceback.format_exc(), file=sys.stderr)
+            traceback.print_exc(file=sys.stderr)
             return _error(msg_id, -32603, "Internal server error. See server logs.")
 
         is_error = result.get("status") == "error"

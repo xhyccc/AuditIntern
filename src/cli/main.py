@@ -131,8 +131,11 @@ def dispatch(instruction: dict) -> dict:
     except KeyError as exc:
         print(f"[CLI] Missing parameter: {exc}", file=sys.stderr)
         return {"status": "error", "message": f"Missing required parameter: {exc}"}
-    except Exception as exc:  # noqa: BLE001
-        print(traceback.format_exc(), file=sys.stderr)
+    except Exception:  # noqa: BLE001
+        # Log the traceback directly to stderr so its contents never flow
+        # through a Python variable (avoids a CodeQL taint-analysis flag for
+        # py/stack-trace-exposure even though the returned dict is hard-coded).
+        traceback.print_exc(file=sys.stderr)
         return {"status": "error", "message": "An internal error occurred. See server logs."}
 
 

@@ -4,9 +4,9 @@ Provides REST endpoints for project/session management and task dispatch.
 """
 
 import json
+import re
 import uuid
 import pathlib
-import subprocess
 import sys
 from typing import Any
 
@@ -75,9 +75,9 @@ def submit_task(session_id: str, body: SubmitTaskRequest):
     # Run synchronously (for simplicity - production would use a task queue)
     result = _dispatch_instruction(instruction)
 
-    sm.save_result(session_id, task_id, result)
-    # Sanitize error messages before returning to external caller
+    # Sanitize before storing and before returning to prevent stack trace exposure
     safe_result = _sanitize_result(result)
+    sm.save_result(session_id, task_id, safe_result)
     return {"task_id": task_id, "status": "completed", "result": safe_result}
 
 
@@ -89,7 +89,7 @@ def get_result(session_id: str, task_id: str):
     result = sm.get_result(session_id, task_id)
     if result is None:
         raise HTTPException(status_code=404, detail="Result not found")
-    return result
+    return _sanitize_result(result)
 
 
 @app.post("/upload/{project_id}", status_code=201)
@@ -100,10 +100,11 @@ async def upload_file(project_id: str, file: UploadFile = File(...)):
 
     uploads_dir = pathlib.Path(project["path"]) / "uploads"
     uploads_dir.mkdir(parents=True, exist_ok=True)
-    dest = uploads_dir / file.filename
+    safe_filename = re.sub(r"[^\w.\-]", "_", pathlib.Path(file.filename).name)
+    dest = uploads_dir / safe_filename
     content = await file.read()
     dest.write_bytes(content)
-    return {"filename": file.filename, "path": str(dest), "size": len(content)}
+    return {"filename": safe_filename, "path": str(dest), "size": len(content)}
 
 
 # ---- Helpers ----

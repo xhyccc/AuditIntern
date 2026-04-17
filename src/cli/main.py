@@ -11,6 +11,7 @@ Usage:
 import argparse
 import json
 import sys
+import traceback
 
 from src.skills import (
     skill_casting_check,
@@ -130,6 +131,7 @@ def dispatch(instruction: dict) -> dict:
     except KeyError as exc:
         return {"status": "error", "message": f"Missing required parameter: {exc}"}
     except Exception as exc:  # noqa: BLE001
+        print(traceback.format_exc(), file=sys.stderr)
         return {"status": "error", "message": str(exc)}
 
 

@@ -44,7 +44,7 @@ class ProjectManager:
         """Resolve a path within the project sandbox, preventing directory traversal."""
         project_dir = (self.base_dir / project_id).resolve()
         target = (project_dir / relative_path).resolve()
-        if not str(target).startswith(str(project_dir)):
+        if not target.is_relative_to(project_dir):
             raise PermissionError(f"Path '{relative_path}' is outside project sandbox.")
         return target
 

@@ -129,10 +129,11 @@ def dispatch(instruction: dict) -> dict:
         print(f"[CLI] Completed intent: {intent}", file=sys.stderr)
         return result
     except KeyError as exc:
+        print(f"[CLI] Missing parameter: {exc}", file=sys.stderr)
         return {"status": "error", "message": f"Missing required parameter: {exc}"}
     except Exception as exc:  # noqa: BLE001
         print(traceback.format_exc(), file=sys.stderr)
-        return {"status": "error", "message": str(exc)}
+        return {"status": "error", "message": "An internal error occurred. See server logs."}
 
 
 def main():

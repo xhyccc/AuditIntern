@@ -6,7 +6,7 @@ Provides sandbox isolation per project and context persistence per session.
 import json
 import pathlib
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class ProjectManager:
@@ -25,7 +25,7 @@ class ProjectManager:
             "project_id": project_id,
             "name": name,
             "description": description,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
             "path": str(project_dir),
         }
         (project_dir / "project.json").write_text(
@@ -64,7 +64,7 @@ class SessionManager:
         meta = {
             "session_id": session_id,
             "name": name,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
         }
         (session_dir / "session.json").write_text(
             json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8"

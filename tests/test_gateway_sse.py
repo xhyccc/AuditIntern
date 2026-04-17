@@ -83,6 +83,26 @@ def test_gateway_stream_params_must_be_object(client):
     assert events[0][0] == "error"
 
 
+def test_gateway_stream_rejects_oversized_params():
+    # Call the endpoint function directly -- TestClient's URL parser caps
+    # length well below our 64 KiB limit, so we can't drive this via HTTP.
+    import asyncio
+    from src.api.server import gateway_stream
+
+    response = gateway_stream(intent="run_casting_check", params="x" * (64 * 1024 + 1))
+
+    async def _collect():
+        chunks = []
+        async for chunk in response.body_iterator:
+            chunks.append(chunk if isinstance(chunk, bytes) else chunk.encode("utf-8"))
+        return b"".join(chunks)
+
+    body = asyncio.run(_collect()).decode("utf-8")
+    events = _parse_sse(body)
+    assert events[0][0] == "error"
+    assert "64" in events[0][1]["message"]
+
+
 def test_gateway_run_unknown_intent(client):
     r = client.post("/gateway/run", json={"intent": "nope", "params": {}})
     assert r.status_code == 200

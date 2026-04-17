@@ -74,7 +74,7 @@ def test_tool_call_round_trip_via_stdio(tmp_path):
         capture_output=True,
         text=True,
         cwd=str(_REPO_ROOT),
-        timeout=60,
+        timeout=20,
     )
     assert proc.returncode == 0, proc.stderr
 

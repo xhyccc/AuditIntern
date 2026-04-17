@@ -136,21 +136,27 @@ def gateway_stream(intent: str, params: str = "{}"):
 
     Query params:
         intent: intent name (see /gateway/intents)
-        params: JSON-encoded params object (default "{}")
+        params: JSON-encoded params object (default "{}"); max 64 KiB.
 
     Emits three events: ``started``, ``result``, ``done``. All payloads are
     JSON. Errors in parsing or dispatch surface as an ``error`` event.
     """
+    # Bound the input to protect against oversized payloads.
+    if len(params) > 64 * 1024:
+        def _too_big():
+            yield _sse("error", {"message": "'params' exceeds 64 KiB limit"})
+            yield _sse("done", {"status": "error"})
+        return StreamingResponse(_too_big(), media_type="text/event-stream")
+
     try:
         parsed_params = json.loads(params)
         if not isinstance(parsed_params, dict):
             raise ValueError("params must be a JSON object")
-    except (json.JSONDecodeError, ValueError) as exc:
-        # Stream the error rather than 400 so the EventSource client sees it.
-        message = f"Invalid 'params': {exc}"
-
+    except (json.JSONDecodeError, ValueError):
+        # Stream a generic parse error (no exception detail) so we don't leak
+        # parser internals to callers.
         def _err_gen():
-            yield _sse("error", {"message": message})
+            yield _sse("error", {"message": "Invalid 'params': expected a JSON object"})
             yield _sse("done", {"status": "error"})
 
         return StreamingResponse(_err_gen(), media_type="text/event-stream")

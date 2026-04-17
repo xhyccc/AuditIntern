@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  # Pin a specific opencode release here (e.g. "0.3.0"); empty = latest.
+  OPENCODE_VERSION: ""
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Cache opencode binary
+        id: cache-opencode
+        uses: actions/cache@v4
+        with:
+          path: ~/.opencode
+          key: opencode-${{ runner.os }}-${{ env.OPENCODE_VERSION != '' && env.OPENCODE_VERSION || 'latest' }}-v1
+
+      - name: Install opencode
+        run: bash scripts/install-opencode.sh
+
+      - name: Verify opencode on PATH
+        run: opencode --version
+
+      - name: Run tests
+        run: pytest tests/ -v

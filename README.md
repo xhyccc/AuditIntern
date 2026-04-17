@@ -45,6 +45,26 @@ API docs at http://localhost:8000/docs
 pytest tests/ -v
 ```
 
+## Installing the opencode Binary
+
+The Gateway orchestrator uses the [opencode](https://opencode.ai) CLI as the
+LLM "brain" that calls our skills through an MCP server. To install it in CI
+or any runtime environment, run:
+
+```bash
+# latest
+bash scripts/install-opencode.sh
+
+# pin a specific version
+OPENCODE_VERSION=0.3.0 bash scripts/install-opencode.sh
+```
+
+The script is idempotent (skips the download if `opencode` is already on
+`PATH`), installs to `~/.opencode/bin` by default, and — when running under
+GitHub Actions — appends that directory to `$GITHUB_PATH` so later steps can
+invoke `opencode` directly. The provided `.github/workflows/ci.yml` caches
+`~/.opencode` across runs.
+
 ## Skills Reference
 
 See [SKILLS.md](SKILLS.md) for full documentation of all available skills.

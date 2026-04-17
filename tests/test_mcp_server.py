@@ -46,6 +46,26 @@ def test_handle_notification_returns_none():
     assert handle_request({"jsonrpc": "2.0", "method": "notifications/initialized"}) is None
 
 
+def test_serve_stdio_handles_malformed_and_empty_lines(capfd):
+    """The stdio loop skips blank lines and malformed JSON, processes the rest."""
+    import io
+    from src.mcp_server.server import serve_stdio
+
+    stdin = io.StringIO(
+        "\n"                                                     # blank line
+        "not json at all\n"                                      # malformed
+        '{"jsonrpc":"2.0","id":1,"method":"ping"}\n'             # valid
+        '{"jsonrpc":"2.0","method":"notifications/initialized"}\n'  # notification -> no response
+    )
+    stdout = io.StringIO()
+    serve_stdio(stdin=stdin, stdout=stdout)
+
+    responses = [json.loads(line) for line in stdout.getvalue().splitlines() if line.strip()]
+    assert len(responses) == 1
+    assert responses[0]["id"] == 1
+    assert responses[0]["result"] == {}
+
+
 def test_tool_call_round_trip_via_stdio(tmp_path):
     """Drive the server as a real subprocess: initialize → tools/call → parse result."""
     df = pd.DataFrame({"科目": ["A", "合计"], "Amount": [42.0, 42.0]})

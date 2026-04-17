@@ -109,3 +109,16 @@ def test_gateway_run_unknown_intent(client):
     body = r.json()
     # Errors are sanitized: the generic message is returned rather than internals.
     assert body["status"] == "error"
+
+
+def test_gateway_run_happy_path(client, tmp_path):
+    df = pd.DataFrame({"科目": ["A", "合计"], "Amount": [1.0, 1.0]})
+    csv_path = tmp_path / "data.csv"
+    df.to_csv(csv_path, index=False)
+    out_path = tmp_path / "out.json"
+    r = client.post("/gateway/run", json={
+        "intent": "run_casting_check",
+        "params": {"file_path": str(csv_path), "output_path": str(out_path)},
+    })
+    assert r.status_code == 200
+    assert r.json()["status"] == "ok"

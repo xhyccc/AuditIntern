@@ -87,9 +87,11 @@ def test_gateway_stream_rejects_oversized_params():
     # Call the endpoint function directly -- TestClient's URL parser caps
     # length well below our 64 KiB limit, so we can't drive this via HTTP.
     import asyncio
-    from src.api.server import gateway_stream
+    from src.api.server import gateway_stream, MAX_PARAMS_SIZE_BYTES
 
-    response = gateway_stream(intent="run_casting_check", params="x" * (64 * 1024 + 1))
+    response = gateway_stream(
+        intent="run_casting_check", params="x" * (MAX_PARAMS_SIZE_BYTES + 1)
+    )
 
     async def _collect():
         chunks = []

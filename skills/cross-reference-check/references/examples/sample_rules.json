@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Revenue: Income Statement vs Trial Balance",
+    "file_a": "income_stmt",
+    "field_a": "revenue",
+    "file_b": "trial_balance",
+    "field_b": "amount"
+  },
+  {
+    "name": "Total Assets: Balance Sheet vs Trial Balance",
+    "file_a": "balance_sheet",
+    "field_a": "total_assets",
+    "file_b": "trial_balance",
+    "field_b": "debit"
+  }
+]

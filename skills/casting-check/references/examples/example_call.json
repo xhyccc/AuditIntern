@@ -1,0 +1,7 @@
+{
+  "intent": "run_casting_check",
+  "params": {
+    "file_path": "skills/casting-check/references/examples/sample_input.csv",
+    "output_path": "results/casting_check_result.json"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "status": "ok",
+  "mappings": [
+    {"client_account": "应收账款", "matched_standard": "Accounts Receivable", "confidence": 0.8731},
+    {"client_account": "货币资金", "matched_standard": "Cash and Cash Equivalents", "confidence": 0.6204},
+    {"client_account": "预付账款", "matched_standard": "Prepaid Expenses", "confidence": 0.7105},
+    {"client_account": "存货", "matched_standard": "Inventory", "confidence": 0.5823},
+    {"client_account": "固定资产", "matched_standard": "Property Plant and Equipment", "confidence": 0.5214},
+    {"client_account": "应付账款", "matched_standard": "Accounts Payable", "confidence": 0.8512},
+    {"client_account": "短期借款", "matched_standard": "Short-term Borrowings", "confidence": 0.7033},
+    {"client_account": "实收资本", "matched_standard": "Paid-in Capital", "confidence": 0.6441},
+    {"client_account": "未分配利润", "matched_standard": "Retained Earnings", "confidence": 0.5678}
+  ]
+}

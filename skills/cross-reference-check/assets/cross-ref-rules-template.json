@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Revenue: Income Statement vs Trial Balance",
+    "file_a": "income_stmt",
+    "field_a": "revenue",
+    "file_b": "trial_balance",
+    "field_b": "amount"
+  },
+  {
+    "name": "Total Expenses: Income Statement vs Trial Balance",
+    "file_a": "income_stmt",
+    "field_a": "expenses",
+    "file_b": "trial_balance",
+    "field_b": "debit"
+  },
+  {
+    "name": "Bank Balance: Bank Reconciliation vs General Ledger",
+    "file_a": "bank_rec",
+    "field_a": "balance",
+    "file_b": "general_ledger",
+    "field_b": "cash_balance"
+  },
+  {
+    "name": "AR: Subledger vs Trial Balance",
+    "file_a": "ar_subledger",
+    "field_a": "outstanding_amount",
+    "file_b": "trial_balance",
+    "field_b": "accounts_receivable"
+  }
+]

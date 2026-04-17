@@ -1,0 +1,8 @@
+{
+  "intent": "run_auto_mapping",
+  "params": {
+    "tb_file": "skills/auto-mapping/references/examples/sample_client_tb.csv",
+    "standard_coa_file": "skills/auto-mapping/references/examples/sample_standard_coa.csv",
+    "output_path": "results/auto_mapping_result.json"
+  }
+}

@@ -1,0 +1,36 @@
+SERVICE AGREEMENT
+
+This Service Agreement ("Agreement") is entered into as of March 1, 2024 ("Effective Date")
+between:
+
+Party A: ABC Technology Co., Ltd., a company incorporated under the laws of the People's
+Republic of China, with registered address at 888 Innovation Road, Pudong New Area, Shanghai
+("Service Provider")
+
+Party B: XYZ Manufacturing Group Co., Ltd., a company incorporated under the laws of the
+People's Republic of China, with registered address at 123 Industrial Park, Suzhou, Jiangsu
+("Client")
+
+1. SERVICES
+Service Provider agrees to provide IT consulting and system integration services as detailed
+in Exhibit A attached hereto.
+
+2. COMPENSATION
+Client shall pay Service Provider a total fee of RMB 2,500,000 (Two Million Five Hundred
+Thousand Renminbi) for the services described herein.
+
+3. PAYMENT SCHEDULE
+Payment shall be made in three installments:
+- 30% upon signing: RMB 750,000
+- 40% upon delivery milestone: RMB 1,000,000
+- 30% upon final acceptance: RMB 750,000
+
+4. TERM
+This Agreement shall commence on the Effective Date and continue until December 31, 2024,
+unless earlier terminated in accordance with the provisions hereof.
+
+5. KEY TERMS
+- Confidentiality obligations survive termination for 3 years
+- Intellectual property created under this Agreement belongs to Client
+- Penalty for late delivery: 0.1% of contract value per day
+- Dispute resolution: arbitration in Shanghai

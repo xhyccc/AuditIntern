@@ -1,0 +1,10 @@
+account_name,account_code,category,subcategory
+Cash and Cash Equivalents,1001,Assets,Current Assets
+Accounts Receivable,1122,Assets,Current Assets
+Prepaid Expenses,1221,Assets,Current Assets
+Inventory,1401,Assets,Current Assets
+Property Plant and Equipment,1601,Assets,Non-Current Assets
+Accounts Payable,2202,Liabilities,Current Liabilities
+Short-term Borrowings,2001,Liabilities,Current Liabilities
+Paid-in Capital,4001,Equity,Share Capital
+Retained Earnings,4104,Equity,Retained Earnings

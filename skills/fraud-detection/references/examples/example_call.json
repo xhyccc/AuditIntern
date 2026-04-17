@@ -1,0 +1,7 @@
+{
+  "intent": "run_fraud_scan",
+  "params": {
+    "file_path": "skills/fraud-detection/references/examples/sample_input.csv",
+    "output_path": "results/fraud_detection_result.json"
+  }
+}

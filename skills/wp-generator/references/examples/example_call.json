@@ -1,0 +1,8 @@
+{
+  "intent": "run_wp_generate",
+  "params": {
+    "template_path": "skills/wp-generator/assets/audit-memo-template.md",
+    "data_file": "skills/wp-generator/references/examples/example_data.json",
+    "output_path": "results/completed_audit_memo.md"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "status": "ok",
+  "fields": {
+    "transaction_amount": "RMB 2,500,000",
+    "effective_date": "March 1, 2024",
+    "party_a": "ABC Technology Co., Ltd.",
+    "party_b": "XYZ Manufacturing Group Co., Ltd.",
+    "key_terms": [
+      "Confidentiality obligations survive termination for 3 years",
+      "Intellectual property created belongs to Client",
+      "Penalty for late delivery: 0.1% of contract value per day",
+      "Dispute resolution: arbitration in Shanghai"
+    ]
+  },
+  "source": "llm"
+}

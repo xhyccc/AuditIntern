@@ -1,0 +1,31 @@
+{
+  "status": "ok",
+  "risk_flags": [
+    {
+      "row": 1,
+      "reasons": [
+        "Sensitive keyword detected: '好处费'",
+        "Round number amount: 100000.0"
+      ]
+    },
+    {
+      "row": 2,
+      "reasons": [
+        "Sensitive keyword detected: 'kickback'",
+        "Amount ending in 999: 999.0"
+      ]
+    },
+    {
+      "row": 3,
+      "reasons": [
+        "Entry on weekend (Saturday)"
+      ]
+    }
+  ],
+  "benford_result": {
+    "chi_square": 8.1234,
+    "p_value": 0.4213,
+    "conforming": true
+  },
+  "red_flag_count": 3
+}

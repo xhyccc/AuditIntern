@@ -1,0 +1,17 @@
+{
+  "client_name": "ABC Manufacturing Co., Ltd.",
+  "audit_period": "Year ended December 31, 2024",
+  "prior_period": "Year ended December 31, 2023",
+  "preparer_name": "Li Ming",
+  "preparer_title": "Audit Senior",
+  "reviewer_name": "Wang Fang",
+  "reviewer_title": "Audit Manager",
+  "partner_name": "Zhang Wei",
+  "preparation_date": "2025-01-15",
+  "engagement_code": "ENG-2024-0892",
+  "total_revenue": "¥125,000,000",
+  "total_assets": "¥380,000,000",
+  "flagged_account_count": "4",
+  "risk_level": "Medium",
+  "conclusion": "Based on procedures performed, no material misstatements were identified in the area tested."
+}

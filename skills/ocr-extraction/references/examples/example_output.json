@@ -1,0 +1,6 @@
+{
+  "status": "ok",
+  "text": "INVOICE\n\nInvoice No: INV-2024-0892\nDate: March 15, 2024\n\nBill To:\nABC Manufacturing Co., Ltd.\n123 Industrial Road, Shanghai\n\nDescription: Consulting Services - Q1 2024\nAmount: ¥45,000.00\nTax (13%): ¥5,850.00\nTotal: ¥50,850.00\n\nPayment Due: April 15, 2024",
+  "confidence": 0.8743,
+  "page_count": 1
+}

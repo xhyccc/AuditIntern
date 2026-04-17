@@ -1,0 +1,8 @@
+{
+  "intent": "run_rag_search",
+  "params": {
+    "query": "revenue recognition five step model performance obligation",
+    "knowledge_base_path": "skills/rag-legal-search/references/examples/sample_knowledge_base/",
+    "output_path": "results/rag_search_result.json"
+  }
+}

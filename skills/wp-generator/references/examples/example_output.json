@@ -1,0 +1,18 @@
+{
+  "status": "ok",
+  "output_file": "results/completed_audit_memo.md",
+  "fields_filled": [
+    "client_name",
+    "audit_period",
+    "prior_period",
+    "preparer_name",
+    "preparer_title",
+    "reviewer_name",
+    "partner_name",
+    "preparation_date",
+    "engagement_code",
+    "total_revenue",
+    "risk_level",
+    "conclusion"
+  ]
+}

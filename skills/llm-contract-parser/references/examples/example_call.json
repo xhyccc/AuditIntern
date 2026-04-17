@@ -1,0 +1,7 @@
+{
+  "intent": "run_contract_parse",
+  "params": {
+    "text": "SERVICE AGREEMENT\n\nThis Service Agreement is entered into as of March 1, 2024 between Party A: ABC Technology Co., Ltd. and Party B: XYZ Manufacturing Group Co., Ltd.\n\n2. COMPENSATION\nClient shall pay Service Provider a total fee of RMB 2,500,000.\n\n5. KEY TERMS\n- Confidentiality obligations survive termination for 3 years\n- Penalty for late delivery: 0.1% of contract value per day",
+    "output_path": "results/contract_parse_result.json"
+  }
+}

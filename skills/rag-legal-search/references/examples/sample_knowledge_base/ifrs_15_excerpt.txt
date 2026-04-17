@@ -1,0 +1,22 @@
+IFRS 15 — Revenue from Contracts with Customers (Excerpt)
+
+Core Principle
+
+An entity shall recognise revenue to depict the transfer of promised goods or services to customers in an amount that reflects the consideration to which the entity expects to be entitled in exchange for those goods or services.
+
+Five-Step Model
+
+Step 1: Identify the contract with a customer.
+A contract is an agreement between two or more parties that creates enforceable rights and obligations. A contract exists when the agreement meets all of the following criteria: the parties have approved the contract; each party's rights can be identified; payment terms can be identified; the contract has commercial substance; it is probable that the entity will collect consideration.
+
+Step 2: Identify the performance obligations in the contract.
+At contract inception, an entity shall assess the goods or services promised in a contract with a customer and shall identify as a performance obligation each promise to transfer either a distinct good or service, or a series of distinct goods or services that are substantially the same.
+
+Step 3: Determine the transaction price.
+The transaction price is the amount of consideration to which an entity expects to be entitled in exchange for transferring promised goods or services to a customer, excluding amounts collected on behalf of third parties.
+
+Step 4: Allocate the transaction price to the performance obligations.
+An entity shall allocate the transaction price to each performance obligation identified in the contract on a relative standalone selling price basis.
+
+Step 5: Recognise revenue when (or as) the entity satisfies a performance obligation.
+Revenue is recognised when control of the promised good or service is transferred to the customer — either at a point in time or over time.

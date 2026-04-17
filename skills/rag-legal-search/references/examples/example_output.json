@@ -1,0 +1,21 @@
+{
+  "status": "ok",
+  "answer": "Step 2: Identify the performance obligations in the contract.\nAt contract inception, an entity shall assess the goods or services promised in a contract with a customer and shall identify as a performance obligation each promise to transfer either a distinct good or service, or a series of distinct goods or services that are substantially the same.",
+  "citations": [
+    {
+      "source": "ifrs_15_excerpt.txt",
+      "score": 0.6821,
+      "excerpt": "Step 2: Identify the performance obligations in the contract.\nAt contract inception, an entity shall assess the goods or services promised in a contract with a customer and shall identify"
+    },
+    {
+      "source": "ifrs_15_excerpt.txt",
+      "score": 0.5934,
+      "excerpt": "Five-Step Model\n\nStep 1: Identify the contract with a customer.\nA contract is an agreement between two or more parties that creates enforceable rights and obligations."
+    },
+    {
+      "source": "ifrs_15_excerpt.txt",
+      "score": 0.4102,
+      "excerpt": "Core Principle\n\nAn entity shall recognise revenue to depict the transfer of promised goods or services to customers in an amount that reflects the consideration to which the entity expects"
+    }
+  ]
+}

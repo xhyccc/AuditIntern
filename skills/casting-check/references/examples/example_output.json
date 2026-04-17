@@ -1,0 +1,13 @@
+{
+  "status": "ok",
+  "discrepancies": [
+    {
+      "type": "column_sum",
+      "column": "Q1",
+      "expected": 115000.0,
+      "actual": 215000.0,
+      "diff": 100000.0
+    }
+  ],
+  "summary": "Found 1 discrepancy(ies) in casting check."
+}

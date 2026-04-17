@@ -29,7 +29,14 @@ def _load(module_name: str, folder: str):
     if full_name in sys.modules:
         return sys.modules[full_name]
     script = _SKILLS_ROOT / folder / "scripts" / f"{module_name}.py"
+    if not script.exists():
+        raise FileNotFoundError(
+            f"Skill script not found: {script}. "
+            f"Expected at skills/{folder}/scripts/{module_name}.py"
+        )
     spec = importlib.util.spec_from_file_location(full_name, script)
+    if spec is None:
+        raise ImportError(f"Could not create import spec for skill '{module_name}' at {script}")
     module = importlib.util.module_from_spec(spec)
     sys.modules[full_name] = module
     spec.loader.exec_module(module)
